@@ -1,25 +1,14 @@
-var inputBox = document.querySelector('#action');
-
-console.log( inputBox.tagName );
-console.log( inputBox.parentNode.tagName );
-
-function addButtonToBody (name) {
-  var newBtn = document.createElement('button');
-  var newName = document.createTextNode(name);
-  
-  newBtn.appendChild(newName);
-  document.body.appendChild(newBtn);
-
+var player = {
+items: [],
 
 };
 
-function addPara(txt){
-var newP = document.createElement('p');
-var newT = document.createTextNode(txt);
-newP.appendChild(newText);
-document.body.appendChild(newP);
+player.pickup = function(item){
+  player.items.push(item);
 };
 
-var adjustTitle = document.querySelector('header > h1');
-var newText = document.createTextNode('I Hope This Works');
-adjustTitle.appendChild(newText);
+var interpret = function(string){
+var adjS = string.trim();
+
+
+};
