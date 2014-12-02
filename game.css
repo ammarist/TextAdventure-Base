@@ -36,6 +36,19 @@ aside#inventory {
     right: 0;
 }
 
+#name {
+  width: 20%;
+  Font-size: 12pt;
+  
+}
+
+#gender {
+  width: 20%;
+  Font-size: 12pt;
+}
+#icon {
+  Font-size: 20pt;
+}
 main {
     width: 60%;
     left: 20%;
@@ -52,7 +65,7 @@ output {
 }
 
 output, input {
-    font-size: 250%;
+    font-size: 100%;
     font-family: cursive;
 }
 

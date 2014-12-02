@@ -2,25 +2,28 @@
 <html>
 <head>
 
-    <title> Text Adventure Game </title>
+    <title> Infiltrator </title>
     <meta charset="UTF-8"/>
     <link href="game.css" rel="stylesheet" />
     <script src="game.js"></script>
+    <script src="locations.js"></script>
 
 </head>
 <body>
 
     <header>
-        <h1> TITLE OF MY TEXT ADVENTURE </h1>
+        <h1> Infiltrator </h1>
     </header>
 
     <main id="game">
-    
+
         <output id="scene">
             <p id="descrip">
-                You awaken to find yourself lying on the cold, marble floor of an impressive cathedral. Everything is silent, and you appear to be alone.
+            	<h1> Welcome to Infiltrator enter your information and enter continue in the action box</h1>
+             <input id="name" type="text" placeholder="Enter your Players Name"/>
+             <input id="gender" type="text" placeholder="Type M for Male and F for Female"/>
             </p>
-            <label for="action"> What will you do? </label>
+            <label for="action">  </label>
         </output>
 
         <section>
@@ -34,6 +37,7 @@
         <ul>
         </ul>
     </aside>
+
 
     <aside id="help">
         <h1> Available Actions </h1>
