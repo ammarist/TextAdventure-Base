@@ -26,22 +26,23 @@ var gameStep = function(input){
 	descrip.innerHTML = "";
 
 	//while (descrip.firstChild) {descrip.remove} goes through a parent and we can remove all children
-	var removeDescrip = document.querySelectorAll()
-	descrip.removeChild(removeDescrip);
+	
 }
 
+var actionBox = document.querySelector('#action')
 
 
 
 var gameStart = function() {
 	var nameInput = document.querySelector('#name');
 	var genderInput = document.querySelector('#gender');
-	nameInput.addEventListener("keyup", function(event){
+	actionBox.addEventListener("keyup", function(event){
 		if (event.keyCode === 13) {
 			player.name = nameInput.value;
 			player.gender = genderInput.value;
 			gameStep(this.value);
+		
 		}
-	});
+	})
 }
 window.onload = gameStart;
