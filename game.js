@@ -52,6 +52,7 @@ var actionBox = document.querySelector("#action")
 var gameIntro = function() {
 	var nameInput = document.querySelector('#name');
 	var genderInput = document.querySelector('#gender');
+	actionBox.addEventListener('keyup', listener)
 	var listener = function(event){
 		if (event.keyCode === 13) {
 			event.target.removeEventListener('keyup', listener)
