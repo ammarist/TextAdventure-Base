@@ -9,6 +9,14 @@ player.pickup = function(item){
   		player.items.push(item);
 }
 
+player.shoot = function(){
+	if (silencedPistol.quantity > 0){
+		alert('Bam!!');	
+		silencedPistol.quantity -= 1;
+	}
+}
+
+
 function clearContent(node) {
     while (node.hasChildNodes()) {
         node.removeChild(node.firstChild);
@@ -33,13 +41,15 @@ function interpret(input) {
     	return cmd;
 }
 
-var gameStep = function(input){
-	var command; // take the user input and put it through the interpreter
-	var result; //run your interpreted command function through execute functionm
-		//need some way of displaying the results on the screen report function
-	var descrip = document.querySelector('#descrip');
-	clearContent(descrip);	
-}
+function gameStart() {
+    var inputBox = document.querySelector("input");
+    inputBox.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            var descrip = document.querySelector('#descrip');
+			clearContent(descrip);	
+			gameStep(this.value);
+        }
+    });
 
 function item (name, numUses, power){
 		this.name = name;
@@ -47,12 +57,11 @@ function item (name, numUses, power){
 		this.power = power;
 }
 
-var actionBox = document.querySelector("#action")
+
 
 var gameIntro = function() {
 	var nameInput = document.querySelector('#name');
 	var genderInput = document.querySelector('#gender');
-	actionBox.addEventListener('keyup', listener)
 	var listener = function(event){
 		if (event.keyCode === 13) {
 			event.target.removeEventListener('keyup', listener)
@@ -60,6 +69,8 @@ var gameIntro = function() {
 			player.gender = genderInput.value;
 			gameStep();	
 		}
+		var actionBox = document.querySelector('#action')
+		actionBox.addEventListener('keyup', listener)
 	}
 }
 
