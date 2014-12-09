@@ -38,6 +38,12 @@ aside#inventory {
 
 }
 
+#nextLoc {
+    position: fixed;
+    left: 0;
+    top: 600;
+}
+
 #name {
   width: 30%;
   Font-size: 12pt;

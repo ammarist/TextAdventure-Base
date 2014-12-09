@@ -4,6 +4,13 @@ var player = {
 		items: [],
 		name: '',
 		gender: '',
+        currentLocation: locations[0].name,
+}
+
+
+function avActions(input){
+    var x = document.querySelector('#help');
+    
 }
 
 function execute(command) {
@@ -22,21 +29,14 @@ player.shoot = function(){
 	}
 }
 
-function displayItemProp(item){
-
-}
 
 
-function navigate(matrix){
-
-}
-
-function append(){
+function appendDescrip(input){ //gets description of current location and puts it on the webpage
+	//node.appendChild(textnode);
 	var node = document.createElement('h1');
-	var textnode = document.createTextNode('locations[][]');
-	node.appendChild(textnode);
+	var textnode = document.createTextNode( getDescripByName(input)); 
 	document.getElementById('scene').appendChild(node);
-
+   
 }
 
 function gameStep(input) {
@@ -44,12 +44,11 @@ function gameStep(input) {
 	while (descrip.firstChild) {
 		descrip.removeChild(descrip.firstChild);
 	}
-    console.log("check");
-    console.log(locations[1]);
     var cmd = interpret(input); // parse the user input
+    // if user types "move lobby"
+    // then cmd.action will be "move" and cmd.target will be "lobby"
     var result = execute(cmd); // run the desired command
     alert(result); // display the results on the screen
-   
 }
 
 

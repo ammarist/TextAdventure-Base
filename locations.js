@@ -52,6 +52,34 @@
 
     var map = {locations: locations, connectionsMatrix: connections};
 
-    function currentLocation(idk){
+   
+    function navigate(matrix){
 
     }
+
+    function getConnectedLocations(row){
+            var connectedL = [];
+                        for(column = 0; column < connections[row].length; column++){
+                                        if(connections[row][column] == 1){
+                                connectedL.push(locations[column].name);  
+                    }
+                }
+            console.log(connectedL);
+        return connectedL;
+    }
+   
+    function getDescripByName(input){
+            var x;
+            for(i = 0; i < locations.length; i++){
+                    if(input == locations[i]){
+                         x = locations[i].description;
+                        return x;
+                    }
+                    else{
+                        x = 'This is not a Location';
+                        return x;
+                    }
+            }
+    }
+
+
