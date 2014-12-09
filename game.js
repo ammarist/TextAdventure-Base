@@ -1,9 +1,14 @@
-		
+var actionBox = document.querySelector('#action');
+
 var player = {
 		items: [],
 		name: '',
 		gender: '',
 }
+
+function execute(command) {
+    player[command.action](command.target);
+
 
 player.pickup = function(item){
   		player.items.push(item);
@@ -16,20 +21,41 @@ player.shoot = function(){
 	}
 }
 
+function displayItemProp(item){
+
+}
+
+function navigate(matrix){
+
+}
+
+function append(){
+	var node = document.createElement('h1');
+	var textnode = document.createTextNode(locations[][]);
+	node.appendChild(textnode);
+	document.getElementById('scene').appendChild(node);
+
+}
+
 function gameStep(input) {
+     var descrip = document.getElementById('scene');
+	while (descrip.firstChild) {
+		descrip.removeChild(descrip.firstChild);
+	}
     console.log("check");
+    console.log(locations[1]);
     var cmd = interpret(input); // parse the user input
     var result = execute(cmd); // run the desired command
-    report(result); // display the results on the screen
-    var descrip = document.querySelector('#descrip');
-	clearContent(descrip);	
+    alert(result); // display the results on the screen
+   
 }
 
 
 function clearContent(node) {
-    while (node.hasChildNodes()) {
-        node.removeChild(node.firstChild);
-    }
+    var descrip = document.getElementById('scene');
+	while (descrip.firstChild) {
+		descrip.removeChild(descrip.firstChild);
+	}
 }
 
 function itemList(items) {
@@ -52,11 +78,10 @@ function interpret(input) {
 
 function gameStart() {
 	
-    var inputBox = document.querySelector("input");
+    var inputBox = document.querySelector("#action");
     inputBox.addEventListener("keyup", function(event) {
         if (event.keyCode === 13) {
-            
-			gameStep(this.value);
+            gameStep(this.value);
         }
     });
 }
@@ -72,10 +97,8 @@ function item (name, numUses, power){
 var gameIntro = function() {
 	var nameInput = document.querySelector('#name');
 	var genderInput = document.querySelector('#gender');
-	var actionBox = document.querySelector('#action')
 		actionBox.addEventListener('keyup', listener = function(event){
 		if (event.keyCode === 13) {
-			event.target.removeEventListener('keyup', listener)
 			player.name = nameInput.value;
 			player.gender = genderInput.value;
 			gameStep();	
