@@ -16,6 +16,15 @@ player.shoot = function(){
 	}
 }
 
+function gameStep(input) {
+    console.log("check");
+    var cmd = interpret(input); // parse the user input
+    var result = execute(cmd); // run the desired command
+    report(result); // display the results on the screen
+    var descrip = document.querySelector('#descrip');
+	clearContent(descrip);	
+}
+
 
 function clearContent(node) {
     while (node.hasChildNodes()) {
@@ -42,14 +51,15 @@ function interpret(input) {
 }
 
 function gameStart() {
+	
     var inputBox = document.querySelector("input");
     inputBox.addEventListener("keyup", function(event) {
         if (event.keyCode === 13) {
-            var descrip = document.querySelector('#descrip');
-			clearContent(descrip);	
+            
 			gameStep(this.value);
         }
     });
+}
 
 function item (name, numUses, power){
 		this.name = name;
@@ -62,16 +72,16 @@ function item (name, numUses, power){
 var gameIntro = function() {
 	var nameInput = document.querySelector('#name');
 	var genderInput = document.querySelector('#gender');
-	var listener = function(event){
+	var actionBox = document.querySelector('#action')
+		actionBox.addEventListener('keyup', listener = function(event){
 		if (event.keyCode === 13) {
 			event.target.removeEventListener('keyup', listener)
 			player.name = nameInput.value;
 			player.gender = genderInput.value;
 			gameStep();	
 		}
-		var actionBox = document.querySelector('#action')
-		actionBox.addEventListener('keyup', listener)
-	}
+		
+	});
 }
 
-window.onload = gameIntro();
+window.onload = gameIntro;
