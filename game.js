@@ -9,6 +9,7 @@ var player = {
 function execute(command) {
     player[command.action](command.target);
 
+}
 
 player.pickup = function(item){
   		player.items.push(item);
@@ -25,13 +26,14 @@ function displayItemProp(item){
 
 }
 
+
 function navigate(matrix){
 
 }
 
 function append(){
 	var node = document.createElement('h1');
-	var textnode = document.createTextNode(locations[][]);
+	var textnode = document.createTextNode('locations[][]');
 	node.appendChild(textnode);
 	document.getElementById('scene').appendChild(node);
 
@@ -97,6 +99,7 @@ function item (name, numUses, power){
 var gameIntro = function() {
 	var nameInput = document.querySelector('#name');
 	var genderInput = document.querySelector('#gender');
+		var actionBox = document.querySelector('#action');
 		actionBox.addEventListener('keyup', listener = function(event){
 		if (event.keyCode === 13) {
 			player.name = nameInput.value;

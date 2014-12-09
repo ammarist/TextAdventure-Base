@@ -52,12 +52,6 @@
 
     var map = {locations: locations, connectionsMatrix: connections};
 
-    function testThis(){
-      for ( i in locations){
-      if(connections[0][i] === 1){
-        console.log(locations[i].name);
-        }
-      }
-    };
+    function currentLocation(idk){
 
-    testThis();
+    }
