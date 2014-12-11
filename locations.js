@@ -1,11 +1,18 @@
 
 
-    function Location(name, description, items, enemies){
+    function Location(name, description, items, enemies, availableActions){
         this.name = name;
         this.description = description;
         this.items = items;
         this.enemies = enemies;
+        this.availableActions = availableActions;
     };
+
+    player.avActions = function(action1, action2, action3) {
+      player.actions.push(action1,action2,action3);
+    }
+
+
 
 
       function itemConstructor(name, description, dam , spDam, quantity){
@@ -26,14 +33,14 @@
 
 
 
-    var lobby = new Location('Lobby', 'This floor has two doors.... they appear to be locked.', 'keycard');
-    var utilitiesRoom = new Location('Utilities Room', 'There seems to be a working keycard encoder', 'Encoded keycard', 2);
-    var elevator = new Location('Elevator', 'Building seems to have 4 floors....' );
-    var home = new Location('Home', 'I need to pick up my gear before I go.', gear)
-    var firstFloor = new Location('First Floor', "You only have Security clearance for this floor! The receptionist keeps looking up at me, I should be able to get some information out of her.", "Target is in the 2nd office on the 2nd floor ")
-    var secondFloor = new Location('Second Floor', "there are two offices which should I go to?" )
-    var officeOne = new Location("First Office", "This is his office... there is medication on his desk", "Pill container")
-    var officeTwo = new Location('Second Office', "He is here", '', 1)    
+    var lobby = new Location('Lobby', 'This floor has two doors.... they appear to be locked.', 'keycard', 0 , player.avActions(pickup,go));
+    var utilitiesRoom = new Location('Utilities Room', 'There seems to be a working keycard encoder', 'Encoded keycard', 2, player.avActions('pickup','shoot'));
+    var elevator = new Location('Elevator', 'Building seems to have 4 floors....', '' ,0 ,player.avActions('go') );
+    var home = new Location('Home', 'I need to pick up my gear before I go.', gear, 0 , player.avActions('pickup', 'go'));
+    var firstFloor = new Location('First Floor', "You only have Security clearance for this floor! The receptionist keeps looking up at me, I should be able to get some information out of her.", "Target is in the 2nd office on the 2nd floor ", 0 , player.avActions('talk', 'go'));
+    var secondFloor = new Location('Second Floor', "there are two offices which should I go to?", '' , 0 , player.avActions('go') );
+    var officeOne = new Location("First Office", "This is his office... there is medication on his desk", "Pill container", 0 , player.avActions("poison", "go"));
+    var officeTwo = new Location('Second Office', "He is here", '', 1, player.avActions('shoot', 'knife', 'observe'));    
 
     var locations = [];
     locations.push(lobby, utilitiesRoom, elevator, home, firstFloor, secondFloor, officeOne, officeTwo);

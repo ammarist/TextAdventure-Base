@@ -5,13 +5,24 @@ var player = {
 		name: '',
 		gender: '',
         currentLocation: locations[0].name,
+        actions: [],
 }
 
+player.avActions = function(action1, action2, action3) {
+      player.actions.push(action1,action2,action3);
+    }
 
-function avActions(input){
-    var x = document.querySelector('#help');
-    
+function help(){
+var i, item, inventory;
+    	inventory = document.querySelector("#inventory > ul");
+    	//clearContent(inventory);
+    		for (i in player.items) {
+        		item = document.createElement ("li");
+        		item.textContent = player.items[i];
+        		inventory.appendChild(item);
+    		}		
 }
+
 
 function execute(command) {
     player[command.action](command.target);
@@ -23,6 +34,7 @@ player.pickup = function(item){
 }
 
 player.shoot = function(){
+	if (player.items.)
 	if (silencedPistol.quantity > 0){
 		alert('Bam!!');	
 		silencedPistol.quantity -= 1;
@@ -44,6 +56,7 @@ function gameStep(input) {
 	while (descrip.firstChild) {
 		descrip.removeChild(descrip.firstChild);
 	}
+	itemList();
     var cmd = interpret(input); // parse the user input
     // if user types "move lobby"
     // then cmd.action will be "move" and cmd.target will be "lobby"
@@ -59,10 +72,10 @@ function clearContent(node) {
 	}
 }
 
-function itemList(items) {
+function itemList() {
 		var i, item, inventory;
     	inventory = document.querySelector("#inventory > ul");
-    	clearContent(inventory);
+    	//clearContent(inventory);
     		for (i in player.items) {
         		item = document.createElement ("li");
         		item.textContent = player.items[i];
