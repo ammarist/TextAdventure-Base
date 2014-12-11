@@ -57,6 +57,15 @@
 
     }
 
+    function dataToRowTranslator(data){
+          for(var i = 0; i < locations.length; i++){ //loops the length of the locations array
+              if(locations[i] === data){ //if locations[i] is equal to the location
+                var rowTranslator = i; //stores the corresponding row number 
+              }
+          }
+          return rowTranslator;
+    }
+
     function getConnectedLocations(row){
             var connectedL = [];
                         for(column = 0; column < connections[row].length; column++){
