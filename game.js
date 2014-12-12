@@ -8,9 +8,6 @@ var player = {
         actions: [],
 }
 
-player.avActions = function(action1, action2, action3) {
-      player.actions.push(action1,action2,action3);
-    }
 
 function help(){
 var i, item, inventory;
