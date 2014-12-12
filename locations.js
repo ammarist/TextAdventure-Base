@@ -65,11 +65,13 @@
     var map = {locations: locations, connectionsMatrix: connections};
 
    
-    function navigate(){
-        var x = getConnectedLocations(player.currentLocationRow.value);
-        for(var i = 0; i < locations.length; i++){
-          if(locations[i].name = x){
-            player.currentLocationName = x;
+    function navigate(input){
+        var x = getConnectedLocations(player.currentLocationRow.value); //takes the number of the current location row which starts off as 0 runs it through get connected locations and gets available places and stores it
+        for(var i = 0; i < locations.length; i++){// loops through location array
+          if(locations[i].name == for (var i = 0; i < x.length; i++) {x[i]} // if the location[i] name is equal to any of the names in x then
+            if(input == location[i].name) // checks to see if users input is the same name
+              player.location = location[i]; //puts the locations object into player.location
+              player.currentLocationRow = location[i].value; //updates the value of the row to the player object
           }
         }
 
@@ -82,7 +84,6 @@
                                 connectedL.push(locations[column].name);  
                     }
                 }
-            console.log(connectedL);
         return connectedL;
     }
    
@@ -100,4 +101,5 @@
             }
     }
 
+    
 

@@ -14,7 +14,7 @@ var player = {
 function help(){
 var i, item, inventory;
     	inventory = document.querySelector("#inventory > ul");
-    	//clearContent(inventory);
+    	clearContent(inventory);
     		for (i in player.items) {
         		item = document.createElement ("li");
         		item.textContent = player.items[i];
