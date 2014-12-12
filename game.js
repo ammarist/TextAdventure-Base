@@ -4,8 +4,10 @@ var player = {
 		items: [],
 		name: '',
 		gender: '',
-        currentLocation: locations[0].name,
+        currentLocationName: locations[0].name,
+        currentLocationRow: locations[0].row,
         actions: [],
+        go: navigate();
 }
 
 
