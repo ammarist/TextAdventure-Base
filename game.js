@@ -7,7 +7,7 @@ var player = {
         currentLocationName: locations[0].name,
         currentLocationRow: locations[0].row,
         actions: [],
-        go: navigate();
+        location: locations[0],
 }
 
 
@@ -15,7 +15,7 @@ function help(){
 var i, item, inventory;
     	inventory = document.querySelector("#inventory > ul");
     	clearContent(inventory);
-    		for (i in player.items) {
+    		for (var i = 0; i < player.items.length; i++) {
         		item = document.createElement ("li");
         		item.textContent = player.items[i];
         		inventory.appendChild(item);
@@ -24,16 +24,31 @@ var i, item, inventory;
 
 
 function execute(command) {
+	if(command === ''){
+		return false
+	}
+	else{
     player[command.action](command.target);
+}
+}
+player.go =function(input){
+	
 
 }
+
+player.check = function(input){
+        var x = getConnectedLocations(player.currentLocationRow);
+       	//takes the number of the current location row which starts off as 0 runs it through get connected locations and gets available places and stores it
+        
+
+    }
+
 
 player.pickup = function(item){
   		player.items.push(item);
 }
 
 player.shoot = function(){
-	if (player.items.)
 	if (silencedPistol.quantity > 0){
 		alert('Bam!!');	
 		silencedPistol.quantity -= 1;
@@ -42,27 +57,44 @@ player.shoot = function(){
 
 
 
-function appendDescrip(input){ //gets description of current location and puts it on the webpage
-	//node.appendChild(textnode);
+function appendDescrip(input){ 
+	var p = document.createElement('p');
 	var node = document.createElement('h1');
-	var textnode = document.createTextNode( getDescripByName(input)); 
-	document.getElementById('scene').appendChild(node);
-   
+	var textnode = document.createTextNode(input); 
+	node.appendChild(textnode);
+	p.appendChild(node);
+	document.getElementById('scene').appendChild(p);
+	
 }
 
-function gameStep(input) {
-     var descrip = document.getElementById('scene');
-	while (descrip.firstChild) {
-		descrip.removeChild(descrip.firstChild);
+function appendAvActions(input){
+	var ul = document.createElement('ul');
+	var textnode = document.createTextNode(input);
+	ul.appendChild(textnode);
+	document.getElementById('avA').appendChild(ul);
+}
+
+function appendInventory(input){
+	var ul = document.createElement('ul');
+	var textnode = document.createTextNode(input);
+	ul.appendChild(textnode);
+	document.getElementById('inventory').appendChild(ul);
+}
+
+
+function gameStep(action) {
+	clearContent();
+	clearActions();
+    var cmd = interpret(action); 
+    var result = execute(cmd);
+    
+}
+function clearActions(){
+	var a = document.getElementById('avA');
+	while (a.firstChild) {
+		a.removeChild(a.firstChild);
 	}
-	itemList();
-    var cmd = interpret(input); // parse the user input
-    // if user types "move lobby"
-    // then cmd.action will be "move" and cmd.target will be "lobby"
-    var result = execute(cmd); // run the desired command
-    alert(result); // display the results on the screen
 }
-
 
 function clearContent(node) {
     var descrip = document.getElementById('scene');
@@ -74,7 +106,7 @@ function clearContent(node) {
 function itemList() {
 		var i, item, inventory;
     	inventory = document.querySelector("#inventory > ul");
-    	//clearContent(inventory);
+    	clearContent(inventory);
     		for (i in player.items) {
         		item = document.createElement ("li");
         		item.textContent = player.items[i];
@@ -90,7 +122,9 @@ function interpret(input) {
 }
 
 function gameStart() {
-	
+	clearContent();
+	appendDescrip(player.location.description);
+	appendAvActions(player.location.availableActions);
     var inputBox = document.querySelector("#action");
     inputBox.addEventListener("keyup", function(event) {
         if (event.keyCode === 13) {
@@ -105,7 +139,9 @@ function item (name, numUses, power){
 		this.power = power;
 }
 
-
+function pushToP(x){
+      player.items.push(x);
+    }
 
 var gameIntro = function() {
 	var nameInput = document.querySelector('#name');
@@ -113,11 +149,13 @@ var gameIntro = function() {
 		var actionBox = document.querySelector('#action');
 		actionBox.addEventListener('keyup', listener = function(event){
 		if (event.keyCode === 13) {
+			x = document.getElementById('action').value
 			player.name = nameInput.value;
 			player.gender = genderInput.value;
-			gameStep();	
+			gameStart();
+
 		}
-		
+		actionBox.removeEventListener('keyup',listener);
 	});
 }
 
