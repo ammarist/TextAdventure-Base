@@ -1,5 +1,6 @@
 var actionBox = document.querySelector('#action');
 
+
 var player = {
 		items: [],
 		name: '',
@@ -38,10 +39,17 @@ function execute(command) {
     player[command.action](command.target);
 }
 
-player.go =function(input){
-	//for(var i = 0; i < player.items.length; i++){
-		//if(player.items[i] == player.location.requirements){
+function removeFromInv(item){
+	for(var i = 0; i < locations.length; i++){
+		if(item == player.items[i]){
+			player.items[i] = '';
+		}
+	}
 
+}
+
+player.go =function(input){
+	console.log(player.gender);
 	for(var i = 0; i < locations.length; i++){
 		if(input == locations[i].name){
 			clearContent();
@@ -50,16 +58,18 @@ player.go =function(input){
 			player.currentLocationRow = locations[i].row;
 			player.currentLocationName = locations[i].name;
 			player.location = locations[i];
-		//}
-	//}
+			}
 	}
-		//else{
-			
-		//}
 }
-}
-player.goBack = function(row){
-	
+
+player.talk = function(){
+		if(player.gender == 'M'){
+			 var x = "Mr."
+		}
+		else{
+			 x = "Mrs."
+		}
+		alert('Hi ' + x + player.name + ' He should be in his office on the second floor');
 }
 
 player.check = function(input){
@@ -74,6 +84,7 @@ player.check = function(input){
 
 player.pickup = function(item){
 		clearItems();
+
 		if(player.location.items = item){
 			player.items.push(item);
 		}
@@ -84,12 +95,43 @@ player.pickup = function(item){
 }
 
 player.shoot = function(){
-	if (silencedPistol.quantity > 0){
-		alert('Bam!!');	
-		silencedPistol.quantity -= 1;
+	if(player.location.enemies !== ''){
+		var x = player.location.enemies;
+		var gearBag = player.items[0];
+		var progBar = document.querySelector('#bar').style.width;
+
+		
+		if(Math.random > .6){
+			if (x.health > 0) {
+			x = x.health - gearBag[1].spDam;
+			progBar = progbar + gearBag[1].alerInc;
+			appendBar(progBar);
+			console.log('this is working');
+		}
+		else{
+			alert('target has been eliminated');
+		}
+		}
+		else{
+			if (x.health > 0) {
+			x = x.health - gearBag[1].dam;
+			progBar = progBar + gearBag[1].alerInc;
+			appendBar(progBar);
+			console.log('this is working too');
+		}
+		else{
+			alert('Target has been eleminated ')
+		}
+		}
 	}
+	else{
+			alert("There is no one to shoot!");
+		} 
 }
 
+function appendBar(x){
+	var progBar = document.querySelector('#bar').style.width = x +'px';
+}
 
 
 function appendDescrip(input){ 

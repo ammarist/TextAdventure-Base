@@ -28,6 +28,11 @@ aside, main {
 aside {
     width: 20%;
 }
+aside#prg {
+    left:80%;
+    top: 400;
+
+}
 
 aside#help {
     left: 0;
@@ -41,7 +46,7 @@ aside#inventory {
 #nextLoc {
     position: fixed;
     left: 0;
-    top: 600;
+    top: 450;
 }
 
 #name {
