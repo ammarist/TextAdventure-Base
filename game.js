@@ -52,12 +52,14 @@ player.go =function(input){
 	console.log(player.gender);
 	for(var i = 0; i < locations.length; i++){
 		if(input == locations[i].name){
+			if(checkReq(locations[i].requirements)){
 			clearContent();
 			appendDescrip(player.location.description);
 			console.log('THANK GOD!!!');
 			player.currentLocationRow = locations[i].row;
 			player.currentLocationName = locations[i].name;
 			player.location = locations[i];
+			}
 			}
 	}
 }
@@ -133,6 +135,16 @@ function appendBar(x){
 	var progBar = document.querySelector('#bar').style.width = x +'px';
 }
 
+function checkReq(input){
+	for(i = 0; i < player.items.length; i++){
+		if(player.items[i] == input){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+}
 
 function appendDescrip(input){ 
 	clearContent();

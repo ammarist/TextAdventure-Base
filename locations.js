@@ -47,7 +47,7 @@
       var gaurd2 = new SecurityGuard(4, "The target is sitting facing the window ");
 
 
-    var lobby = new Location('lobby', 'This is the Lobby. There are inate patterns on the wall. This floor has two doors.... the elevator appears to be locked. I see an employees keycard on the ground, but I need a way of encoding it', keycard, '' , ['pickup keycard ',' go utilities room', 'go elevator'], 1, gear);
+    var lobby = new Location('lobby', 'This is the Lobby. There are inate patterns on the wall. This floor has two doors.... the elevator appears to be locked. I see an employees keycard on the ground, but I need a way of encoding it', keycard, '' , ['pickup keycard ',' go utilities room', 'go elevator'], 1, gear, '');
     var utilitiesRoom = new Location('utilities room', 'There seems to be a working keycard encoder. There is a security gaurd what should I do?', encodedKeycard, gaurd1, ['pickup encoded keycard ','shoot gaurd1 ', 'go lobby', 'knife gaurd1'], 2, encodedKeycard, keycard);
     var elevator = new Location('elevator', 'Building seems to have 4 floors....', '' ,'' ,'go first floor', 3 , encodedKeycard, encodedKeycard);
     var home = new Location('home', 'I just got my intel on a new target. The intel should be in my gear. I need to pick up my gear before I go.', gear, '',  'go lobby, pickup gear', 0, gear);
