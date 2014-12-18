@@ -12,14 +12,14 @@ var player = {
 }
 
 player.use = function(item){
-		for(var i = 0; i < player.items.length; i++){
-			if(item == player.items[i]){
-				var x = player.items[i]
-			}
+	for(var i = 0; i < player.items.length; i++){
+		if(item == player.items[i]){
+		var x = player.items[i]
+	}
 		if(x.quantity == 1){
-			x = '';
-			alert('Proceed');
-		}
+		x = '';
+		alert('Proceed');
+	}
 }
 }
 
@@ -48,19 +48,30 @@ function removeFromInv(item){
 
 }
 
+player.check = function(input){
+	console.log(input);
+	console.log(player.items[0]);
+		if(player.items[0] == 'gear'){
+			for(i = 0; i < gear.length; i++){
+				alert(gear[i].name);
+				alert(gear[i].description);
+			}
+		}
+}
+
 player.go =function(input){
 	console.log(player.gender);
 	for(var i = 0; i < locations.length; i++){
 		if(input == locations[i].name){
 			if(checkReq(locations[i].requirements)){
-			clearContent();
-			appendDescrip(player.location.description);
-			console.log('THANK GOD!!!');
-			player.currentLocationRow = locations[i].row;
-			player.currentLocationName = locations[i].name;
-			player.location = locations[i];
+				clearContent();
+				appendDescrip(player.location.description);
+				console.log('THANK GOD!!!');
+				player.currentLocationRow = locations[i].row;
+				player.currentLocationName = locations[i].name;
+				player.location = locations[i];
 			}
-			}
+		}
 	}
 }
 
@@ -72,14 +83,6 @@ player.talk = function(){
 			 x = "Mrs."
 		}
 		alert('Hi ' + x + player.name + ' He should be in his office on the second floor');
-}
-
-player.check = function(input){
-        var x = getConnectedLocations(player.currentLocationRow);
-        appendAvActions('Go ' + x);
-
-       	//takes the number of the current location row which starts off as 0 runs it through get connected locations and gets available places and stores it
-
 }
 
 
@@ -99,35 +102,28 @@ player.pickup = function(item){
 player.shoot = function(){
 	if(player.location.enemies !== ''){
 		var x = player.location.enemies;
-		var gearBag = player.items[0];
+		var gearBag = gear;
 		var progBar = document.querySelector('#bar').style.width;
-
+		console.log(progBar);
 		
 		if(Math.random > .6){
 			if (x.health > 0) {
-			x = x.health - gearBag[1].spDam;
+
+			x.health = x.health - gearBag[1].spDam;
 			progBar = progbar + gearBag[1].alerInc;
 			appendBar(progBar);
-			console.log('this is working');
-		}
-		else{
-			alert('target has been eliminated');
+			alert('One in the head');
 		}
 		}
-		else{
 			if (x.health > 0) {
-			x = x.health - gearBag[1].dam;
+			x.health = x.health - gearBag[1].dam;
 			progBar = progBar + gearBag[1].alerInc;
 			appendBar(progBar);
-			console.log('this is working too');
+			alert('Bam!')
 		}
-		else{
-			alert('Target has been eleminated ')
+		if(x.health <= 0){
+		 alert(x.name + ' is dead');
 		}
-		}
-	}
-	else{
-			alert("There is no one to shoot!");
 		} 
 }
 
@@ -136,14 +132,17 @@ function appendBar(x){
 }
 
 function checkReq(input){
+	console.log(input);
+	
 	for(i = 0; i < player.items.length; i++){
+		console.log(player.items[i]);
 		if(player.items[i] == input){
 			return true;
 		}
-		else{
-			return false;
-		}
+		
 	}
+	
+	return false;
 }
 
 function appendDescrip(input){ 
