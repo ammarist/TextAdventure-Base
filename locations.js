@@ -29,13 +29,13 @@
       }
 
       var intel = new itemConstructor('intel', 'Target Name: Paul White, Location: should be on second floor');
-      var silencedPistol = new itemConstructor('Silenced 9mm Pistol', ' polymer-framed, short recoil operated, locked breech semi-automatic pistol', 2, 5, 15, 3 );
-      var poison = new itemConstructor('Posion', "Slip into a consumable and watch your desired outcome", 5, 5, 1, 1);
-      var knife = new itemConstructor('Knife',"Raptor Claw knife. Perfect for a stealth kill", 1, 5, 10, 1);
+      var silencedPistol = new itemConstructor('Silenced 9mm Pistol', ' polymer-framed, short recoil operated, locked breech semi-automatic pistol', 2, 5, 15, 50 );
+      var poison = new itemConstructor('Posion', "Slip into a consumable and watch your desired outcome", 10, 5, 1, 10);
+      var knife = new itemConstructor('Knife',"Raptor Claw knife. Perfect for a stealth kill", 10, 5, 10, 10);
       var keycard = new itemConstructor('keycard', 'used for security clearance', 0, 0, 1);
       var encodedKeycard = new itemConstructor('encodedKeycard', 'can be used for all floors', 0, 0, 1);
 
-
+      var pillContainer = 0;
       var gear = [intel, silencedPistol, poison, knife];
 
       function SecurityGuard(health, description, name){
@@ -45,31 +45,32 @@
       }
 
       var gaurd1 = new SecurityGuard(4, 'The tall muscular gaurd is sitting on his chair', 'gaurd');
-      var gaurd2 = new SecurityGuard(4, "The target is sitting facing the window ", 'target');
+      var paul = new SecurityGuard(4, "The target is sitting facing the window ", 'paul');
 
-
+    var gameOver = new Location('gameOver', "GAME OVER THANKS FOR PLAYING!!!!");
     var lobby = new Location('lobby', 'This is the Lobby. There are inate patterns on the wall. This floor has two doors.... the elevator appears to be locked. I see an employees keycard on the ground, but I need a way of encoding it', keycard, '' , ['pickup keycard ',' go utilities room', 'go elevator'], 1, 'gear', '');
     var utilitiesRoom = new Location('utilities room', 'There seems to be a working keycard encoder. There is a security gaurd what should I do?', encodedKeycard, gaurd1, ['pickup encodedKeycard ','shoot gaurd1 ', 'go lobby', 'knife gaurd1'], 2, 'keycard', keycard);
     var elevator = new Location('elevator', 'Building seems to have 4 floors....', '' ,'' ,'go first floor', 3 , 'encodedkeycard', encodedKeycard);
     var home = new Location('home', 'I just got my intel on a new target. The intel should be in my gear. I need to pick up my gear before I go.', gear, '',  'go lobby, pickup gear, check gear', 0, gear);
     var firstFloor = new Location('first floor', "The receptionist keeps looking up at me, I should be able to get some information out of her.", "Target is in the 2nd office on the 2nd floor ", '' , ['talk ', 'go second floor'], 3, 'encodedkeycard', '');
     var secondFloor = new Location('second floor', "there are two offices which should I go to?", '' , '' , ['go first office'], 4 , 'encodedkeycard');
-    var officeOne = new Location("first office", "This is his office... there is medication on his desk", "Pill container", '' , ["poison pill container ", "go second office"], 5, 'encodedkeycard');
-    var officeTwo = new Location('second office', "He is here", '', gaurd2, [' shoot gaurd2', ' knife gaurd2', ' observe gaurd2'], 6, 'encodedkeycard');    
+    var officeOne = new Location("first office", "This is his office... there is medication on his desk", pillContainer, '' , ["poison pillContainer ", "go second office"], 5, 'encodedkeycard');
+    var officeTwo = new Location('second office', "He is here", '', paul, [' shoot paul', ' knife paul', ' observe paul'], 6, 'encodedkeycard');    
 
     var locations = [];
-    locations.push(home, lobby, utilitiesRoom, elevator,  firstFloor, secondFloor, officeOne, officeTwo);
+    locations.push(home, lobby, utilitiesRoom, elevator,  firstFloor, secondFloor, officeOne, officeTwo,gameOver);
 
 
     var connections = [
-      [0,1,0,0,0,0,0,0],
-      [1,0,1,1,0,0,0,0],
-      [0,1,0,0,0,0,0,0],
-      [0,1,0,0,1,0,0,0],
-      [0,0,0,1,0,1,0,0],
-      [0,0,0,0,1,0,1,0],
-      [0,0,0,0,0,1,0,1],
-      [0,0,0,0,0,0,1,0]
+      [0,1,0,0,0,0,0,0,0],
+      [1,0,1,1,0,0,0,0,0],
+      [0,1,0,0,0,0,0,0,0],
+      [0,1,0,0,1,0,0,0,0],
+      [0,0,0,1,0,1,0,0,0],
+      [0,0,0,0,1,0,1,0,0],
+      [0,0,0,0,0,1,0,1,0],
+      [0,0,0,0,0,0,1,0,0],
+      [0,0,0,0,0,0,0,1,0]
     ];
 
 

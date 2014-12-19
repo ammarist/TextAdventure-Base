@@ -1,4 +1,5 @@
 var actionBox = document.querySelector('#action');
+var gumdrop = 0;
 
 
 var player = {
@@ -99,32 +100,126 @@ player.pickup = function(item){
   		appendInventory(player.items);
 }
 
+function checkAlert(){
+	if(document.querySelector('#bar').style.width == "200px"){
+		alert('DONT JUST USE THE GUN! GAMEOVER');
+		player.location = locations[0];
+		player.currentLocationName = locations[0].name;
+        player.currentLocationRow = locations[0].row;
+        clearContent();
+        appendDescrip(player.location.description);
+	}
+
+}
+
 player.shoot = function(){
 	if(player.location.enemies !== ''){
 		var x = player.location.enemies;
+		var v = 0;
 		var gearBag = gear;
-		var progBar = document.querySelector('#bar').style.width;
-		console.log(progBar);
+		
 		
 		if(Math.random > .6){
 			if (x.health > 0) {
 
 			x.health = x.health - gearBag[1].spDam;
-			progBar = progbar + gearBag[1].alerInc;
-			appendBar(progBar);
+			v = v + gearBag[1].alerInc;
+			gumdrop = gumdrop + v;
+			var l = gumdrop.toString();
+			document.querySelector('#bar').style.width = l;
 			alert('One in the head');
 		}
 		}
 			if (x.health > 0) {
 			x.health = x.health - gearBag[1].dam;
-			progBar = progBar + gearBag[1].alerInc;
-			appendBar(progBar);
+			 v = v + gearBag[1].alerInc;
+			 gumdrop = gumdrop + v;
+			var l = gumdrop.toString();
+			document.querySelector('#bar').style.width = l;
 			alert('Bam!')
 		}
 		if(x.health <= 0){
 		 alert(x.name + ' is dead');
+		 console.log(paul.health);
+		 
 		}
 		} 
+		gameOver();
+}
+function gameOver(){
+	console.log('we out here');
+	console.log(paul.health);
+	if (paul.health <= 0){
+		console.log('now im really confused')
+		player.go(gameOver);
+	} 
+}
+
+player.knife = function(){
+	
+	if(player.location.enemies !== ''){
+		var x = player.location.enemies;
+		var gearBag = gear;
+		var v = 0;
+		 document.querySelector('#bar').style.width;
+		
+		
+		if(Math.random > .6){
+			if (x.health > 0) {
+
+			x.health = x.health - gearBag[3].spDam;
+			v = v + gearBag[1].alerInc;
+			gumdrop = gumdrop + v;
+			var l = gumdrop.toString();
+			document.querySelector('#bar').style.width = l;
+			alert('Decapitation');
+		}
+		}
+			if (x.health > 0) {
+			x.health = x.health - gearBag[3].dam;
+			v = v + gearBag[1].alerInc;
+			gumdrop = gumdrop + v;
+			var l = gumdrop.toString();
+			document.querySelector('#bar').style.width = l;
+			alert('You watch as the ' + x.name + ' bleeds out')
+		}
+		if(x.health <= 0){
+		 alert(x.name + ' is dead');
+		 
+		}
+		} 
+gameOver();
+}
+
+player.poison = function(input){
+	
+	var v = 0;
+	if(player.location.items == pillContainer){
+		var gearBag = gear;
+		pillContainer = 1;	
+		v = v + gearBag[1].alerInc;
+		gumdrop = gumdrop + v;
+		var l = gumdrop.toString();
+		document.querySelector('#bar').style.width = l;
+		}
+	}
+
+player.observe = function(){
+	var gearBag = gear;
+	var y = player.location.enemies;
+	if(pillContainer === 1){
+		if(player.gender == 'M'){
+			 var x = "Mr."
+		}
+		if(player.gender == 'F'){
+			 x = "Mrs."
+		}
+		y.health = x.health - gearBag[2].dam;
+		appendDescrip(x + player.name + " How can I help you..... gahhhhhhh.")
+		
+
+	}
+	gameOver();
 }
 
 function appendBar(x){
