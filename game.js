@@ -20,19 +20,19 @@ player.use = function(item){
 		if(x.quantity == 1){
 		x = '';
 		alert('Proceed');
+		}
 	}
-}
 }
 
 function help(){
-var i, item, inventory;
-    	inventory = document.querySelector("#inventory > ul");
-    	clearContent(inventory);
-    		for (var i = 0; i < player.items.length; i++) {
-        		item = document.createElement ("li");
-        		item.textContent = player.items[i];
-        		inventory.appendChild(item);
-    		}		
+	var i, item, inventory;
+   	inventory = document.querySelector("#inventory > ul");
+   	clearContent(inventory);
+    	for (var i = 0; i < player.items.length; i++) {
+       		item = document.createElement ("li");
+       		item.textContent = player.items[i];
+       		inventory.appendChild(item);
+   	}		
 }
 
 
@@ -46,18 +46,15 @@ function removeFromInv(item){
 			player.items[i] = '';
 		}
 	}
-
 }
 
 player.check = function(input){
-	console.log(input);
-	console.log(player.items[0]);
 		if(player.items[0] == 'gear'){
 			for(i = 0; i < gear.length; i++){
 				alert(gear[i].name);
 				alert(gear[i].description);
-			}
 		}
+	}
 }
 
 player.go =function(input){
@@ -67,7 +64,6 @@ player.go =function(input){
 			if(checkReq(locations[i].requirements)){
 				clearContent();
 				appendDescrip(player.location.description);
-				console.log('THANK GOD!!!');
 				player.currentLocationRow = locations[i].row;
 				player.currentLocationName = locations[i].name;
 				player.location = locations[i];
@@ -83,19 +79,18 @@ player.talk = function(){
 		else{
 			 x = "Mrs."
 		}
-		alert('Hi ' + x + player.name + ' He should be in his office on the second floor');
+		alert('Hi ' + x + player.name + ', Mr. White should be in his office on the second floor');
 }
 
 
 
 player.pickup = function(item){
 		clearItems();
-
 		if(player.location.items = item){
 			player.items.push(item);
 		}
   		else{
-  			console.log('not for you');
+  			alert('Not for you');
   		}
   		appendInventory(player.items);
 }
@@ -121,114 +116,105 @@ player.shoot = function(){
 		
 		if(Math.random > .6){
 			if (x.health > 0) {
-
-			x.health = x.health - gearBag[1].spDam;
-			v = v + gearBag[1].alerInc;
-			gumdrop = gumdrop + v;
-			var l = gumdrop.toString();
-			document.querySelector('#bar').style.width = l;
-			alert('One in the head');
-		}
+				x.health = x.health - gearBag[1].spDam;
+				v = v + gearBag[1].alerInc;
+				gumdrop = gumdrop + v;
+				var l = gumdrop.toString();
+				document.querySelector('#bar').style.width = l;
+				alert('One in the head');
+			}
 		}
 			if (x.health > 0) {
-			x.health = x.health - gearBag[1].dam;
-			 v = v + gearBag[1].alerInc;
-			 gumdrop = gumdrop + v;
-			var l = gumdrop.toString();
-			document.querySelector('#bar').style.width = l;
-			alert('Bam!')
+				x.health = x.health - gearBag[1].dam;
+			 	v = v + gearBag[1].alerInc;
+				 gumdrop = gumdrop + v;
+				var l = gumdrop.toString();
+				document.querySelector('#bar').style.width = l;
+				alert('Bam!')
 		}
-		if(x.health <= 0){
-		 alert(x.name + ' is dead');
-		 console.log(paul.health);
-		 
-		}
+			if(x.health <= 0){
+		 		alert(x.name + ' is dead');
+			}
 		} 
-		gameOver();
+		gameO();
 }
-function gameOver(){
-	console.log('we out here');
-	console.log(paul.health);
-	if (paul.health <= 0){
-		console.log('now im really confused')
-		player.go(gameOver);
+
+	function gameO(){
+		if (paul.health <= 0){
+			player.go('gameOver');
+			clearItems();
 	} 
 }
 
 player.knife = function(){
-	
 	if(player.location.enemies !== ''){
 		var x = player.location.enemies;
 		var gearBag = gear;
 		var v = 0;
-		 document.querySelector('#bar').style.width;
-		
-		
-		if(Math.random > .6){
+		document.querySelector('#bar').style.width;
+			if(Math.random > .6){
+				if (x.health > 0) {
+					x.health = x.health - gearBag[3].spDam;
+					v = v + gearBag[1].alerInc;
+					gumdrop = gumdrop + v;
+					var l = gumdrop.toString();
+					document.querySelector('#bar').style.width = l;
+					alert('Decapitation');
+					}
+			}
 			if (x.health > 0) {
-
-			x.health = x.health - gearBag[3].spDam;
-			v = v + gearBag[1].alerInc;
-			gumdrop = gumdrop + v;
-			var l = gumdrop.toString();
-			document.querySelector('#bar').style.width = l;
-			alert('Decapitation');
+				x.health = x.health - gearBag[3].dam;
+				v = v + gearBag[1].alerInc;
+				gumdrop = gumdrop + v;
+				var l = gumdrop.toString();
+				document.querySelector('#bar').style.width = l;
+				alert('You watch as the ' + x.name + ' bleeds out')
 		}
-		}
-			if (x.health > 0) {
-			x.health = x.health - gearBag[3].dam;
-			v = v + gearBag[1].alerInc;
-			gumdrop = gumdrop + v;
-			var l = gumdrop.toString();
-			document.querySelector('#bar').style.width = l;
-			alert('You watch as the ' + x.name + ' bleeds out')
-		}
-		if(x.health <= 0){
-		 alert(x.name + ' is dead');
-		 
-		}
+			if(x.health <= 0){
+		 		alert(x.name + ' is dead');
+		 		gameO();
+			}
 		} 
-gameOver();
+
 }
 
 player.poison = function(input){
-	
 	var v = 0;
-	if(player.location.items == pillContainer){
-		var gearBag = gear;
-		pillContainer = 1;	
-		v = v + gearBag[1].alerInc;
-		gumdrop = gumdrop + v;
-		var l = gumdrop.toString();
-		document.querySelector('#bar').style.width = l;
+		if(player.location.items == pillContainer){
+			var gearBag = gear;
+			pillContainer = 1;	
+			v = v + gearBag[1].alerInc;
+			gumdrop = gumdrop + v;
+			var l = gumdrop.toString();
+			document.querySelector('#bar').style.width = l;
 		}
 	}
 
 player.observe = function(){
 	var gearBag = gear;
 	var y = player.location.enemies;
-	if(pillContainer === 1){
-		if(player.gender == 'M'){
-			 var x = "Mr."
+		if(pillContainer === 1){
+			if(player.gender == 'M'){
+			 	var x = "Mr."
 		}
-		if(player.gender == 'F'){
-			 x = "Mrs."
+			if(player.gender == 'F'){
+			 	x = "Mrs."
 		}
-		y.health = x.health - gearBag[2].dam;
-		appendDescrip(x + player.name + " How can I help you..... gahhhhhhh.")
+		y.health = y.health - gearBag[2].dam;
+			if(y.health <= 0){
+				alert(x + player.name + " How can I help you..... gahhhhhhh.");
+		 		alert(paul.name + ' is dead');
+		}
+		}
+		gameO();
 		
-
 	}
-	gameOver();
-}
 
 function appendBar(x){
 	var progBar = document.querySelector('#bar').style.width = x +'px';
 }
 
-function checkReq(input){
-	console.log(input);
-	
+function checkReq(input){	
 	for(i = 0; i < player.items.length; i++){
 		console.log(player.items[i]);
 		if(player.items[i] == input){
@@ -236,7 +222,7 @@ function checkReq(input){
 		}
 		
 	}
-	
+	alert('You don\'t have the item requirement to go to the next room! you need the item' );
 	return false;
 }
 
@@ -283,12 +269,14 @@ function clearActions(){
 		a.removeChild(a.firstChild);
 	}
 }
+
 function clearItems(){
 	var a = document.getElementById('inv');
 	while (a.firstChild) {
 		a.removeChild(a.firstChild);
 	}
 }
+
 function clearContent(node) {
     var descrip = document.getElementById('scene');
 	while (descrip.firstChild) {
@@ -313,6 +301,7 @@ function interpret(input) {
     	cmd.target = tokens.join(" ");
     	return cmd;
 }
+
 function returnGameStepLocation(action) {
    			 var cmd = interpret(action);
 				var x = cmd.target
@@ -320,7 +309,6 @@ function returnGameStepLocation(action) {
 				}		
 
 function gameStart() {
-	
 	clearActions();
 	appendDescrip(player.location.description);// appends the Home description to the page
 	appendAvActions();//

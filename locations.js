@@ -44,18 +44,18 @@
               this.name = name;
       }
 
-      var gaurd1 = new SecurityGuard(4, 'The tall muscular gaurd is sitting on his chair', 'gaurd');
+      var gaurd = new SecurityGuard(4, 'The tall muscular gaurd is sitting on his chair', 'gaurd');
       var paul = new SecurityGuard(4, "The target is sitting facing the window ", 'paul');
 
-    var gameOver = new Location('gameOver', "GAME OVER THANKS FOR PLAYING!!!!");
+    var gameOver = new Location('gameOver', "GAME OVER THANKS FOR PLAYING!!!!", keycard, '' , [], 7, 'gear', '');
     var lobby = new Location('lobby', 'This is the Lobby. There are inate patterns on the wall. This floor has two doors.... the elevator appears to be locked. I see an employees keycard on the ground, but I need a way of encoding it', keycard, '' , ['pickup keycard ',' go utilities room', 'go elevator'], 1, 'gear', '');
-    var utilitiesRoom = new Location('utilities room', 'There seems to be a working keycard encoder. There is a security gaurd what should I do?', encodedKeycard, gaurd1, ['pickup encodedKeycard ','shoot gaurd1 ', 'go lobby', 'knife gaurd1'], 2, 'keycard', keycard);
-    var elevator = new Location('elevator', 'Building seems to have 4 floors....', '' ,'' ,'go first floor', 3 , 'encodedkeycard', encodedKeycard);
+    var utilitiesRoom = new Location('utilities room', 'There seems to be a working keycard encoder. There is a security gaurd what should I do?', encodedKeycard, gaurd, ['shoot gaurd ', 'knife gaurd','pickup encodedKeycard ', 'go lobby'], 2, 'keycard', keycard);
+    var elevator = new Location('elevator', 'Building seems to have 2 floors.... The first floor is already selected, lets see what I can find out.', '' ,'' ,'go first floor', 3 , 'encodedkeycard', encodedKeycard);
     var home = new Location('home', 'I just got my intel on a new target. The intel should be in my gear. I need to pick up my gear before I go.', gear, '',  'go lobby, pickup gear, check gear', 0, gear);
     var firstFloor = new Location('first floor', "The receptionist keeps looking up at me, I should be able to get some information out of her.", "Target is in the 2nd office on the 2nd floor ", '' , ['talk ', 'go second floor'], 3, 'encodedkeycard', '');
-    var secondFloor = new Location('second floor', "there are two offices which should I go to?", '' , '' , ['go first office'], 4 , 'encodedkeycard');
+    var secondFloor = new Location('second floor', "This is the second floor. He should be in the second office", '' , '' , ['go first office'], 4 , 'encodedkeycard');
     var officeOne = new Location("first office", "This is his office... there is medication on his desk", pillContainer, '' , ["poison pillContainer ", "go second office"], 5, 'encodedkeycard');
-    var officeTwo = new Location('second office', "He is here", '', paul, [' shoot paul', ' knife paul', ' observe paul'], 6, 'encodedkeycard');    
+    var officeTwo = new Location('second office', "Hi my name is Paul White! How can I help you?", '', paul, [' shoot paul', ' knife paul', ' observe paul'], 6, 'encodedkeycard');    
 
     var locations = [];
     locations.push(home, lobby, utilitiesRoom, elevator,  firstFloor, secondFloor, officeOne, officeTwo,gameOver);
